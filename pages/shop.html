@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIIW ERA - Shop</title>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <link rel="stylesheet" href="/styles/shop.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script>
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+</script>
+
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <div class="hamburger" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
+
+      <nav id="mobile-nav">
+  <ul>
+    <li><a href="/index.html">HOME</a></li>
+    <li><a href="./pages/shop.html" class="active">SHOP</a></li>
+    <li><a href="#">BLOG</a></li>
+  </ul>
+</nav>
+
+    </div>
+    <div class="logo">NIIW ERA</div>
+    <div class="header-right">
+<div class="search-toggle" onclick="toggleSearch()">
+  <i class="fas fa-search"></i>
+</div>
+<div class="header-search" id="header-search">
+  <input type="text" id="search-input" placeholder="Search..." />
+  <button id="search-button"><i class="fas fa-search"></i></button>
+</div>
+
+
+      <a href="#"><i class="fas fa-user"></i></a>
+      <a href="#" class="cart"><i class="fas fa-shopping-bag"></i><span>0</span></a>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </header>
+
+<main>
+  <section class="shop-hero">
+    <div class="hero-content">
+      <h1>Shop the Collection</h1>
+      <p>Streetwear that speaks without words.</p>
+    </div>
+  </section>
+
+  <section class="shop-section">
+    <div class="shop-sidebar">
+      <h3>Filter</h3>
+      <ul class="filter-list">
+        <li><a href="#" class="active" data-category="all">All</a></li>
+        <li><a href="#" data-category="tops">Tops</a></li>
+        <li><a href="#" data-category="bottoms">Bottoms</a></li>
+        <li><a href="#" data-category="dresses">Dresses</a></li>
+        <li><a href="#" data-category="accessories">Accessories</a></li>
+      </ul>
+
+      <div class="filter-group">
+        <label>Max Price</label>
+        <input type="range" id="price-range" min="0" max="200" value="200" />
+        <span id="price-value">$200</span>
+      </div>
+
+      <div class="filter-group">
+        <label for="sort-by">Sort</label>
+        <select id="sort-by">
+          <option value="newest">Newest</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="shop-content">
+      <div class="products-header">
+        <h2>All Products</h2>
+        <p id="product-count">Showing 0 products</p>
+      </div>
+
+      <div class="products-grid" id="products-container">
+        <!-- JS loads products here -->
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+    <div class="newsletter">
+      <h3>Newsletter</h3>
+      <p>Get timely updates from your favorite products.</p>
+      <form>
+        <input type="email" placeholder="Enter your email address" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        Streetwear is more than just what you wear—it’s what you stand for.  
+        Niiw Era is for the fearless. The ones who refuse to fit into a mold.
+      </p>
+      <p>&copy;2023 NIIW ERA</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+<script src="/js/app.js"></script>
+<script src="/js/shop.js"></script>
+
+</body>
+</html>

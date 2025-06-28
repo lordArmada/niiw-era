@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+   @font-face {
+       font-family: montserrat;
+       src: url(/assets/Montserrat-VariableFont_wght.ttf);
+   }
+:root {
+  --cream: #f5e8d0;
+  --dark-cream: #e6d5b8;
+  --black: #121212;
+  --white: #ffffff;
+  --gray: #333333;
+  --light-gray: #aaaaaa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--black);
+}
+
+section .color {
+  position: absolute;
+  filter: blur(150px);
+}
+
+section .color:nth-child(1) {
+  top: -350px;
+  width: 600px;
+  height: 600px;
+  background: rgba(245, 232, 208, 0.2); 
+}
+
+section .color:nth-child(2) {
+  bottom: -150px;
+  left: 100px;
+  width: 500px;
+  height: 500px;
+  background: rgba(230, 213, 184, 0.2); 
+}
+
+section .color:nth-child(3) {
+  bottom: 50px;
+  right: 100px;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1); 
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(18, 18, 18, 0.75);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+}
+
+.box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  transform: skewX(-15deg);
+}
+
+.box .square {
+  position: absolute;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(245, 232, 208, 0.05); 
+  border-radius: 10px;
+  animation: animate 10s linear infinite;
+  animation-delay: calc(-1s * var(--i));
+}
+
+@keyframes animate {
+  0%, 100% {
+    transform: translateY(-40px);
+  }
+  50% {
+    transform: translateY(40px);
+  }
+}
+
+/* Update the square positions to be closer to the container */
+.box .square:nth-child(1) {
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+}
+
+.box .square:nth-child(2) {
+  top: 120px;
+  left: -50px;
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+}
+
+.box .square:nth-child(3) {
+  bottom: 50px;
+  right: -30px;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+}
+
+.box .square:nth-child(4) {
+  bottom: -40px;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+}
+
+.box .square:nth-child(5) {
+  top: -40px;
+  left: 80px;
+  width: 60px;
+  height: 60px;
+}
+
+.container {
+  position: relative;
+  width: 400px;
+  min-height: 400px;
+  background: rgba(18, 18, 18, 0.9);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+}
+
+.form h2 {
+  position: relative;
+  color: var(--white);
+  font-family: montserrat;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.form h2::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+  width: 50px;
+  height: 4px;
+  background: var(--cream);
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.logo-container h3 {
+    font-family: montserrat;
+  color: var(--cream);
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(245, 232, 208, 0.3);
+}
+
+.form .inputBox {
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+
+.form .inputBox input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  outline: none;
+  padding: 10px 15px 10px 45px;
+  border-radius: 5px;
+  color: var(--white);
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: 0.5s;
+}
+
+.form .inputBox input:focus {
+  border-color: var(--cream);
+}
+
+.form .inputBox i {
+  position: absolute;
+  top: 13px;
+  left: 15px;
+  color: var(--cream);
+  font-size: 18px;
+}
+
+.form .inputBox input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form .inputBox input[type="submit"] {
+  background: var(--cream);
+  color: var(--black);
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 600;
+  padding: 10px 15px;
+  transition: 0.5s;
+  text-align: center;
+}
+
+.form .inputBox input[type="submit"]:hover {
+  background: var(--dark-cream);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(245, 232, 208, 0.4);
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  font-size: 14px;
+  color: var(--light-gray);
+}
+
+.remember-forgot label {
+  display: flex;
+  align-items: center;
+}
+
+.remember-forgot label input {
+  margin-right: 5px;
+  accent-color: var(--cream);
+}
+
+.remember-forgot a {
+  color: var(--light-gray);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.remember-forgot a:hover {
+  color: var(--cream);
+}
+
+.signup {
+  margin-top: 20px;
+  color: var(--light-gray);
+  text-align: center;
+  font-size: 14px;
+}
+
+.signup a {
+  color: var(--cream);
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.signup a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+  }
+  
+  .form {
+    padding: 30px 20px;
+  }
+}
+
+/* Add these styles to your existing CSS file */
+
+/* Terms and conditions checkbox styling */
+.terms {
+  display: flex;
+  margin: 15px 0;
+  font-size: 14px;
+  color: var(--light-gray);
+}
+
+.terms label {
+  display: flex;
+  align-items: center;
+}
+
+.terms label input {
+  margin-right: 5px;
+  accent-color: var(--cream);
+}
+
+.terms a {
+  color: var(--cream);
+  text-decoration: none;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* Make the container taller for signup page */
+.pages-signup .container {
+  min-height: 480px;
+}

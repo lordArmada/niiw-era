@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIIW ERA - New Arrivals</title>
+
+  <!-- Apply theme early (Safari fix) -->
+  <script>
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+
+  <!-- Fonts and Styles -->
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="header-left">
+      <nav>
+        <ul>
+          <li><a href="#" class="active">HOME</a></li>
+          <li><a href="#">BLOG</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="logo">NIIW ERA</div>
+    <div class="header-right">
+      <a href="#"><i class="fas fa-search"></i></a>
+      <a href="#"><i class="fas fa-user"></i></a>
+      <a href="#" class="cart"><i class="fas fa-shopping-bag"></i><span>0</span></a>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>New Arrivals</h1>
+        <div class="collections">
+          <a href="#" class="collection-btn">Women Collection</a>
+          <a href="#" class="collection-btn">Men Collection</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="new-arrivals">
+      <h2 class="section-title">🆕 New Arrivals</h2>
+      <p class="section-subtitle">Fresh drops for this season’s vibe.</p>
+
+      <div class="products-grid">
+        <div class="product">
+          <div class="product-image">
+            <img src="./assets/images/IMG_4855.PNG" class="main-img" alt="Main" />
+            <img src="./assets/images/IMG_4747.jpg" class="hover-img" alt="Hover" />
+            <div class="product-actions">
+              <button class="btn-wishlist"><i class="far fa-heart"></i></button>
+              <button class="btn-add-cart">Add to Cart</button>
+            </div>
+            <div class="new-tag">New</div>
+          </div>
+          <div class="product-brand">NIIW ERA</div>
+          <h3>Oversized Hoodie</h3>
+          <div class="price">$89.99</div>
+        </div>
+        <!-- Add more products similarly -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="newsletter">
+      <h3>Newsletter</h3>
+      <p>Get timely updates from your favorite products.</p>
+      <form>
+        <input type="email" placeholder="Enter your email address" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <p>Streetwear is more than just what you wear—it’s what you stand for.</p>
+      <p>&copy;2023 NIIW ERA</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const root = document.documentElement;
+      const icon = document.getElementById("theme-icon");
+      const current = root.getAttribute("data-theme") || "dark";
+      const next = current === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", next);
+      icon.className = next === "light" ? "fas fa-sun" : "fas fa-moon";
+      localStorage.setItem("theme", next);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const saved = localStorage.getItem("theme");
+      if (saved) {
+        document.documentElement.setAttribute("data-theme", saved);
+        document.getElementById("theme-icon").className =
+          saved === "light" ? "fas fa-sun" : "fas fa-moon";
+      }
+
+      // Mobile support for product hover actions
+      document.querySelectorAll('.product').forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('show-actions');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
