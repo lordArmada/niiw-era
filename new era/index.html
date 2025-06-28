@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIIW ERA - New Arrivals</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <div class="hamburger" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
+
+      <nav id="mobile-nav">
+  <ul>
+    <li><a href="#" class="active">HOME</a></li>
+    <li><a href="./pages/shop.html">SHOP</a></li>
+    <li><a href="#">BLOG</a></li>
+  </ul>
+</nav>
+
+    </div>
+    <div class="logo">NIIW ERA</div>
+    <div class="header-right">
+    <div class="search-toggle" onclick="toggleSearch()">
+  <i class="fas fa-search"></i>
+</div>
+<div class="header-search" id="header-search">
+  <input type="text" id="search-input" placeholder="Search..." />
+  <button id="search-button"><i class="fas fa-search"></i></button>
+</div>
+
+      <a href="#"><i class="fas fa-user"></i></a>
+      <a href="#" class="cart"><i class="fas fa-shopping-bag"></i><span>0</span></a>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>New Arrivals</h1>
+        <div class="collections">
+          <a href="#" class="collection-btn">Women Collection</a>
+          <a href="#" class="collection-btn">Men Collection</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="new-arrivals">
+      <h2 class="section-title">🆕 New Arrivals</h2>
+      <p class="section-subtitle">Fresh drops for this season’s vibe.</p>
+
+      <div class="products-grid">
+        <!-- Repeatable Product Cards -->
+        <div class="product">
+          <div class="product-image">
+            <img src="./assets/images/IMG_4855.PNG" class="main-img" />
+            <img src="./assets/images/IMG_4747.jpg" class="hover-img" />
+            <div class="product-actions">
+              <form method="POST" action="wishlist.php">
+                <input type="hidden" name="product_id" value="1" />
+                <button type="submit" class="btn-wishlist"><i class="far fa-heart"></i></button>
+              </form>
+              <button class="btn-quick-view" data-id="1">Quick View</button>
+            </div>
+            <div class="new-tag">New</div>
+          </div>
+          <div class="product-brand">NIIW ERA</div>
+          <h3>Drop Shoulder Tee</h3>
+          <div class="price">$64.99</div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">
+            <img src="./assets/images/IMG_4856.PNG" class="main-img" />
+            <img src="./assets/images/IMG_4857.PNG" class="hover-img" />
+            <div class="product-actions">
+              <form method="POST" action="wishlist.php">
+                <input type="hidden" name="product_id" value="2" />
+                <button type="submit" class="btn-wishlist"><i class="far fa-heart"></i></button>
+              </form>
+              <button class="btn-quick-view" data-id="2">Quick View</button>
+            </div>
+            <div class="hot-tag">Hot</div>
+          </div>
+          <div class="product-brand">NIIW ERA</div>
+          <h3>Monogram Zip Jacket</h3>
+          <div class="price">$124.99</div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">
+            <img src="./assets/images/IMG_4861.PNG" class="main-img" />
+            <img src="./assets/images/IMG_4860.PNG" class="hover-img" />
+            <div class="product-actions">
+              <form method="POST" action="wishlist.php">
+                <input type="hidden" name="product_id" value="3" />
+                <button type="submit" class="btn-wishlist"><i class="far fa-heart"></i></button>
+              </form>
+              <button class="btn-quick-view" data-id="3">Quick View</button>
+            </div>
+            <div class="sale-tag">Sale</div>
+          </div>
+          <div class="product-brand">NIIW ERA</div>
+          <h3>Contrast Stitch Hoodie</h3>
+          <div class="price"><span class="old-price">$89.99</span> $69.99</div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">
+            <img src="./assets/images/IMG_4862.PNG" class="main-img" />
+            <img src="./assets/images/IMG_4859.PNG" class="hover-img" />
+            <div class="product-actions">
+              <form method="POST" action="wishlist.php">
+                <input type="hidden" name="product_id" value="4" />
+                <button type="submit" class="btn-wishlist"><i class="far fa-heart"></i></button>
+              </form>
+              <button class="btn-quick-view" data-id="4">Quick View</button>
+            </div>
+            <div class="new-tag">New</div>
+          </div>
+          <div class="product-brand">NIIW ERA</div>
+          <h3>Minimalist Tracksuit</h3>
+          <div class="price">$74.99</div>
+        </div>
+
+        <div class="product">
+          <div class="product-image">
+            <img src="./assets/images/IMG_4858.PNG" class="main-img" />
+            <img src="./assets/images/IMG_4859.PNG" class="hover-img" />
+            <div class="product-actions">
+              <form method="POST" action="wishlist.php">
+                <input type="hidden" name="product_id" value="5" />
+                <button type="submit" class="btn-wishlist"><i class="far fa-heart"></i></button>
+              </form>
+              <button class="btn-quick-view" data-id="5">Quick View</button>
+            </div>
+            <div class="sale-tag">Sale</div>
+          </div>
+          <div class="product-brand">NIIW ERA</div>
+          <h3>Utility Vest</h3>
+          <div class="price"><span class="old-price">$69.99</span> $54.99</div>
+        </div>
+      </div>
+      <div class="load-more">
+        <button>Load More</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+<div class="quick-view-modal" style="display: none;">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+    <div class="modal-body">
+      <div class="modal-image">
+        <img src="" alt="Product Image" />
+      </div>
+      <div class="modal-info">
+        <h3>Product Name</h3>
+        <p class="modal-price">$0.00</p>
+        <p class="modal-description">Product description goes here...</p>
+        <div class="option-group">
+  <label for="size">Size</label>
+  <select id="size">
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+    <option>XL</option>
+  </select>
+</div>
+
+<div class="option-group">
+  <label for="color">Color</label>
+  <div class="color-options">
+    <span class="color-dot" style="background: black;"></span>
+    <span class="color-dot" style="background: #f44336;"></span>
+    <span class="color-dot" style="background: #2e86de;"></span>
+  </div>
+</div>
+
+        <button class="btn-add-cart">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Footer -->
+  <footer>
+    <div class="newsletter">
+      <h3>Newsletter</h3>
+      <p>Get timely updates from your favorite products.</p>
+      <form>
+        <input type="email" placeholder="Enter your email address" />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        Streetwear is more than just what you wear—it’s what you stand for.  
+        Niiw Era is for the fearless. The ones who refuse to fit into a mold.
+      </p>
+      <p>&copy;2023 NIIW ERA</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+  <script>
+    function toggleTheme() {
+      const root = document.documentElement;
+      const themeIcon = document.getElementById("theme-icon");
+      if (root.getAttribute("data-theme") === "light") {
+        root.removeAttribute("data-theme");
+        themeIcon.className = "fas fa-moon";
+        localStorage.setItem("theme", "dark");
+      } else {
+        root.setAttribute("data-theme", "light");
+        themeIcon.className = "fas fa-sun";
+        localStorage.setItem("theme", "light");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const savedTheme = localStorage.getItem("theme");
+      const themeIcon = document.getElementById("theme-icon");
+      if (savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+        themeIcon.className = "fas fa-sun";
+      }
+    });
+
+    const products = {
+      1: {
+        name: "Drop Shoulder Tee",
+        price: "$64.99",
+        image: "./assets/images/IMG_4855.PNG",
+        desc: "Oversized cut, street-ready, drop shoulder tee for everyday edge.",
+      },
+      2: {
+        name: "Monogram Zip Jacket",
+        price: "$124.99",
+        image: "./assets/images/IMG_4856.PNG",
+        desc: "Weatherproof zip-up with embroidered NIIW monogram.",
+      },
+      3: {
+        name: "Contrast Stitch Hoodie",
+        price: "$69.99",
+        image: "./assets/images/IMG_4861.PNG",
+        desc: "Heavyweight hoodie with raw contrast stitching and attitude.",
+      },
+      4: {
+        name: "Minimalist Tracksuit",
+        price: "$74.99",
+        image: "./assets/images/IMG_4862.PNG",
+        desc: "Sleek comfort meets athletic utility. Limited drop.",
+      },
+      5: {
+        name: "Utility Vest",
+        price: "$54.99",
+        image: "./assets/images/IMG_4858.PNG",
+        desc: "Functional layering with NIIW attitude. Water resistant.",
+      }
+    };
+
+    document.querySelectorAll('.btn-quick-view').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const modal = document.querySelector('.quick-view-modal');
+        modal.querySelector('img').src = products[id].image;
+        modal.querySelector('h3').textContent = products[id].name;
+        modal.querySelector('.modal-price').textContent = products[id].price;
+        modal.querySelector('.modal-description').textContent = products[id].desc;
+        modal.style.display = 'flex';
+      });
+    });
+
+    document.querySelector('.modal-close').addEventListener('click', () => {
+      document.querySelector('.quick-view-modal').style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target.classList.contains('quick-view-modal')) {
+        e.target.style.display = 'none';
+      }
+    });
+    // Enable tap-to-toggle actions on mobile
+document.querySelectorAll('.product').forEach(product => {
+  product.addEventListener('touchstart', () => {
+    // Remove active class from all other products
+    document.querySelectorAll('.product').forEach(p => p.classList.remove('active'));
+    product.classList.add('active');
+  });
+});
+window.addEventListener('touchstart', function(e) {
+  if (!e.target.closest('.product')) {
+    document.querySelectorAll('.product').forEach(p => p.classList.remove('active'));
+  }
+});
+function toggleMenu() {
+  const nav = document.getElementById('mobile-nav');
+  nav.classList.toggle('open');
+}
+
+
+  </script>
+</body>
+</html>
