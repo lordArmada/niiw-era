@@ -3,33 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NIIW ERA - New Arrivals</title>
-
-  <!-- Apply theme early (Safari fix) -->
-  <script>
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  </script>
-
-  <!-- Fonts and Styles -->
-  <link rel="stylesheet" href="/styles/style.css" />
+  <title>NIIW ERA - Shop</title>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <link rel="stylesheet" href="/styles/shop.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-</head>
+  <script>
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+</script>
 
+</head>
 <body>
+
   <header>
     <div class="header-left">
-      <nav>
-        <ul>
-          <li><a href="#" class="active">HOME</a></li>
-          <li><a href="#">BLOG</a></li>
-        </ul>
-      </nav>
+      <div class="hamburger" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
+
+      <nav id="mobile-nav">
+  <ul>
+    <li><a href="/index.html" >HOME</a></li>
+    <li><a href="./pages/shop.html">SHOP</a></li>
+    <li><a href="#">BLOG</a></li>
+  </ul>
+</nav>
+
     </div>
     <div class="logo">NIIW ERA</div>
     <div class="header-right">
-      <a href="#"><i class="fas fa-search"></i></a>
+<div class="search-toggle" onclick="toggleSearch()">
+  <i class="fas fa-search"></i>
+</div>
+<div class="header-search" id="header-search">
+  <input type="text" id="search-input" placeholder="Search..." />
+  <button id="search-button"><i class="fas fa-search"></i></button>
+</div>
+
+
       <a href="#"><i class="fas fa-user"></i></a>
       <a href="#" class="cart"><i class="fas fa-shopping-bag"></i><span>0</span></a>
       <button class="theme-toggle" onclick="toggleTheme()">
@@ -38,6 +49,7 @@
     </div>
   </header>
 
+  <!-- Hero Section -->
   <main>
     <section class="hero">
       <div class="hero-content">
@@ -49,30 +61,16 @@
       </div>
     </section>
 
+    <!-- Product Grid (Dynamic via JS or hardcoded initially) -->
     <section class="new-arrivals">
       <h2 class="section-title">🆕 New Arrivals</h2>
-      <p class="section-subtitle">Fresh drops for this season’s vibe.</p>
-
-      <div class="products-grid">
-        <div class="product">
-          <div class="product-image">
-            <img src="./assets/images/IMG_4855.PNG" class="main-img" alt="Main" />
-            <img src="./assets/images/IMG_4747.jpg" class="hover-img" alt="Hover" />
-            <div class="product-actions">
-              <button class="btn-wishlist"><i class="far fa-heart"></i></button>
-              <button class="btn-add-cart">Add to Cart</button>
-            </div>
-            <div class="new-tag">New</div>
-          </div>
-          <div class="product-brand">NIIW ERA</div>
-          <h3>Oversized Hoodie</h3>
-          <div class="price">$89.99</div>
-        </div>
-        <!-- Add more products similarly -->
+      <div class="products-grid" id="products-container">
+        <!-- JS renders product cards here -->
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
     <div class="newsletter">
       <h3>Newsletter</h3>
@@ -83,7 +81,10 @@
       </form>
     </div>
     <div class="footer-bottom">
-      <p>Streetwear is more than just what you wear—it’s what you stand for.</p>
+      <p>
+        Streetwear is more than just what you wear—it’s what you stand for.  
+        Niiw Era is for the fearless. The ones who refuse to fit into a mold.
+      </p>
       <p>&copy;2023 NIIW ERA</p>
       <div class="social-links">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -93,6 +94,8 @@
     </div>
   </footer>
 
+  <!-- Scripts -->
+  <script src="/js/shop.js"></script>
   <script>
     function toggleTheme() {
       const root = document.documentElement;
@@ -104,6 +107,11 @@
       localStorage.setItem("theme", next);
     }
 
+    function toggleMenu() {
+      const nav = document.getElementById("mobile-nav");
+      nav.classList.toggle("active");
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       const saved = localStorage.getItem("theme");
       if (saved) {
@@ -111,13 +119,6 @@
         document.getElementById("theme-icon").className =
           saved === "light" ? "fas fa-sun" : "fas fa-moon";
       }
-
-      // Mobile support for product hover actions
-      document.querySelectorAll('.product').forEach(card => {
-        card.addEventListener('click', () => {
-          card.classList.toggle('show-actions');
-        });
-      });
     });
   </script>
 </body>

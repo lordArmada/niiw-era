@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIIW ERA - Wishlist</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="/styles/wishlist.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <div class="hamburger" role="button" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </div>
+      <nav id="mobile-nav">
+        <ul>
+          <li><a href="/index.html">HOME</a></li>
+          <li><a href="/pages/shop.html">SHOP</a></li>
+          <li><a href="/pages/cart.html">CART</a></li>
+        </ul>
+      </nav>
+    </div>
+    
+    <div class="logo">NIIW ERA</div>
+    
+    <div class="header-right">
+      <div class="search-toggle" role="button" aria-label="Toggle search">
+        <i class="fas fa-search"></i>
+      </div>
+      <div class="header-search" id="header-search">
+        <input type="text" id="search-input" placeholder="Search..." />
+        <button id="search-button" aria-label="Search products"><i class="fas fa-search"></i></button>
+      </div>
+      <a href="/pages/wishlist.html" class="active"><i class="far fa-heart"></i></a>
+      <a href="#"><i class="fas fa-user"></i></a>
+      <a href="/pages/cart.html" class="cart"><i class="fas fa-shopping-bag"></i><span>0</span></a>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="wishlist-page">
+    <h1>My Wishlist</h1>
+    
+    <div class="wishlist-container">
+      <!-- Wishlist items will be dynamically inserted here -->
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>NIIW ERA - Your destination for contemporary fashion.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/pages/shop.html">Shop</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 NIIW ERA. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/cart-wishlist.js"></script>
+  <script>
+    // Load and display wishlist items
+    function loadWishlist() {
+      fetch('/php/wishlist.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'action=get'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          showNotification(data.error, 'error');
+          return;
+        }
+        
+        const wishlistContainer = document.querySelector('.wishlist-container');
+        
+        if (data.items.length === 0) {
+          wishlistContainer.innerHTML = '<div class="empty-wishlist">Your wishlist is empty</div>';
+          return;
+        }
+        
+        wishlistContainer.innerHTML = data.items.map(item => `
+          <div class="wishlist-item" data-id="${item.id}">
+            <img src="${item.image}" alt="${item.name}" class="item-image">
+            <div class="item-details">
+              <h3>${item.name}</h3>
+              <div class="item-price">$${item.price.toFixed(2)}</div>
+              <div class="item-actions">
+                <button class="add-to-cart-btn" aria-label="Add to cart">Add to Cart</button>
+                <button class="remove-from-wishlist" aria-label="Remove from wishlist">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        // Add event listeners for wishlist item actions
+        setupWishlistControls();
+      });
+    }
+    
+    function setupWishlistControls() {
+      // Add to cart buttons
+      document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          const item = button.closest('.wishlist-item');
+          const productId = item.dataset.id;
+          
+          fetch('/php/cart.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=add&product_id=${productId}&quantity=1`
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              updateCartCount();
+              showNotification(data.message, 'success');
+            } else {
+              showNotification(data.error, 'error');
+            }
+          });
+        });
+      });
+      
+      // Remove from wishlist buttons
+      document.querySelectorAll('.remove-from-wishlist').forEach(button => {
+        button.addEventListener('click', () => {
+          const item = button.closest('.wishlist-item');
+          const productId = item.dataset.id;
+          
+          fetch('/php/wishlist.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=remove&product_id=${productId}`
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              loadWishlist();
+              showNotification(data.message, 'success');
+            } else {
+              showNotification(data.error, 'error');
+            }
+          });
+        });
+      });
+    }
+    
+    // Load wishlist on page load
+    loadWishlist();
+  </script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIIW ERA - Shopping Cart</title>
+ <link rel="stylesheet" href="../styles/style.css" />
+  <link rel="stylesheet" href="/styles/shop.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+   <script>
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+</script>
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <div class="hamburger" role="button" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </div>
+      <nav id="mobile-nav">
+        <ul>
+          <li><a href="/index.html">HOME</a></li>
+          <li><a href="/pages/shop.html">SHOP</a></li>
+          <li><a href="/pages/cart.html">BLOG</a></li>
+        </ul>
+      </nav>
+    </div>
+    
+    <div class="logo">NIIW ERA</div>
+    
+    <div class="header-right">
+      <div class="search-toggle" role="button" aria-label="Toggle search">
+        <i class="fas fa-search"></i>
+      </div>
+      <div class="header-search" id="header-search">
+        <input type="text" id="search-input" placeholder="Search..." />
+        <button id="search-button" aria-label="Search products"><i class="fas fa-search"></i></button>
+      </div>
+      <a href="/pages/wishlist.html"><i class="far fa-heart"></i></a>
+      <a href="#"><i class="fas fa-user"></i></a>
+      <a href="/pages/cart.html" class="cart active"><i class="fas fa-shopping-bag"></i><span>0</span></a>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="cart-page">
+    <h1>Shopping Cart</h1>
+    
+    <div class="cart-container">
+      <div class="cart-items">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+      
+      <div class="cart-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span class="subtotal">$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span class="shipping">Calculated at checkout</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span class="total-amount">$0.00</span>
+        </div>
+        <button class="checkout-button">Proceed to Checkout</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>NIIW ERA - Your destination for contemporary fashion.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/pages/shop.html">Shop</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 NIIW ERA. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/cart-wishlist.js"></script>
+  <script>
+    // Load and display cart items
+    function loadCart() {
+      fetch('/php/cart.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'action=get'
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          showNotification(data.error, 'error');
+          return;
+        }
+        
+        const cartItems = document.querySelector('.cart-items');
+        const subtotal = document.querySelector('.subtotal');
+        const totalAmount = document.querySelector('.total-amount');
+        
+        if (data.items.length === 0) {
+          cartItems.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+          subtotal.textContent = '$0.00';
+          totalAmount.textContent = '$0.00';
+          return;
+        }
+        
+        cartItems.innerHTML = data.items.map(item => `
+          <div class="cart-item" data-id="${item.id}">
+            <img src="${item.image}" alt="${item.name}" class="item-image">
+            <div class="item-details">
+              <h3>${item.name}</h3>
+              <div class="item-price">$${item.price.toFixed(2)}</div>
+              <div class="quantity-controls">
+                <button class="quantity-btn minus" aria-label="Decrease quantity">-</button>
+                <input type="number" value="${item.quantity}" min="1" aria-label="Quantity">
+                <button class="quantity-btn plus" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+            <div class="item-subtotal">$${item.subtotal.toFixed(2)}</div>
+            <button class="remove-item" aria-label="Remove item"><i class="fas fa-times"></i></button>
+          </div>
+        `).join('');
+        
+        subtotal.textContent = `$${data.total.toFixed(2)}`;
+        totalAmount.textContent = `$${data.total.toFixed(2)}`;
+        
+        // Add event listeners for quantity controls and remove buttons
+        setupCartControls();
+      });
+    }
+    
+    function setupCartControls() {
+      // Quantity controls
+      document.querySelectorAll('.quantity-controls').forEach(control => {
+        const input = control.querySelector('input');
+        const minus = control.querySelector('.minus');
+        const plus = control.querySelector('.plus');
+        const item = control.closest('.cart-item');
+        const productId = item.dataset.id;
+        
+        minus.addEventListener('click', () => {
+          if (input.value > 1) {
+            input.value = parseInt(input.value) - 1;
+            updateCartItem(productId, input.value);
+          }
+        });
+        
+        plus.addEventListener('click', () => {
+          input.value = parseInt(input.value) + 1;
+          updateCartItem(productId, input.value);
+        });
+        
+        input.addEventListener('change', () => {
+          if (input.value < 1) input.value = 1;
+          updateCartItem(productId, input.value);
+        });
+      });
+      
+      // Remove buttons
+      document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', () => {
+          const item = button.closest('.cart-item');
+          const productId = item.dataset.id;
+          
+          fetch('/php/cart.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=remove&product_id=${productId}`
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              loadCart();
+              updateCartCount();
+              showNotification(data.message, 'success');
+            } else {
+              showNotification(data.error, 'error');
+            }
+          });
+        });
+      });
+    }
+    
+    function updateCartItem(productId, quantity) {
+      fetch('/php/cart.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `action=update&product_id=${productId}&quantity=${quantity}`
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          loadCart();
+          updateCartCount();
+        } else {
+          showNotification(data.error, 'error');
+        }
+      });
+    }
+    
+    // Load cart on page load
+    loadCart();
+  </script>
+</body>
+</html>

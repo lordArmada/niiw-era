@@ -3,7 +3,7 @@
 $db_host = 'localhost';
 $db_user = 'root';  // Change to your database username
 $db_pass = '';      // Change to your database password
-$db_name = 'niiw_era';
+$db_name = 'new era';
 
 // Create database connection
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);

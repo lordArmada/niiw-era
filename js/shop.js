@@ -256,3 +256,56 @@ function toggleMenu() {
   const nav = document.getElementById("mobile-nav");
   nav.classList.toggle("open");
 }
+
+const modal = document.querySelector(".quick-view-modal");
+const modalClose = modal.querySelector(".modal-close");
+const modalImg = modal.querySelector(".modal-image img");
+const modalTitle = modal.querySelector(".modal-title");
+const modalPrice = modal.querySelector(".modal-price");
+const modalDesc = modal.querySelector(".modal-description");
+
+// Your full product data
+const productDetails = {
+  1: {
+    title: "Clover Expression Shirt",
+    price: "$54.99",
+    image: "./assets/images/IMG_4855.PNG",
+    desc: `Step confidently into your journey with our "Clover Expression" shirt...`,
+  },
+  2: {
+    title: "Fela Halftone Tee",
+    price: "$59.99",
+    image: "./assets/images/IMG_4856.PNG",
+    desc: `Unleash your inner strength with our striking "Niiw Era" shirt...`,
+  },
+  3: {
+    title: "Awolowo Tribute Tee",
+    price: "$64.99",
+    image: "./assets/images/IMG_4861.PNG",
+    desc: `Wear your pride and history with our "Halftone of Awolowo" shirt...`,
+  },
+};
+
+document.querySelectorAll(".btn-quick-view").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const id = btn.getAttribute("data-id");
+    const product = productDetails[id];
+
+    modalImg.src = product.image;
+    modalTitle.textContent = product.title;
+    modalPrice.textContent = product.price;
+    modalDesc.textContent = product.desc;
+
+    modal.style.display = "flex";
+  });
+});
+
+modalClose.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target.classList.contains("quick-view-modal")) {
+    modal.style.display = "none";
+  }
+});
