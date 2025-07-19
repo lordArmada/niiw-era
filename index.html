@@ -3,44 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NIIW ERA - Shop</title>
-  <link rel="stylesheet" href="../styles/style.css" />
-  <link rel="stylesheet" href="/styles/shop.css">
+  <title>NIIW ERA - New Arrivals</title>
+  <link rel="stylesheet" href="/styles/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <script>
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-</script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
 
 </head>
 <body>
-
+  <!-- Header -->
   <header>
     <div class="header-left">
       <div class="hamburger" onclick="toggleMenu()">
-  <i class="fas fa-bars"></i>
-</div>
-
+        <i class="fas fa-bars"></i>
+      </div>
       <nav id="mobile-nav">
-  <ul>
-    <li><a href="/index.html" >HOME</a></li>
-    <li><a href="./pages/shop.html">SHOP</a></li>
-    <li><a href="#">BLOG</a></li>
-  </ul>
-</nav>
-
+        <ul>
+          <li><a href="#" class="active">HOME</a></li>
+          <li><a href="./pages/shop.html">SHOP</a></li>
+          <li><a href="#">BLOG</a></li>
+        </ul>
+      </nav>
     </div>
     <div class="logo">NIIW ERA</div>
     <div class="header-right">
-<div class="search-toggle" onclick="toggleSearch()">
-  <i class="fas fa-search"></i>
-</div>
-<div class="header-search" id="header-search">
-  <input type="text" id="search-input" placeholder="Search..." />
-  <button id="search-button"><i class="fas fa-search"></i></button>
-</div>
-
-
+      <a href="#" id="search-toggle"><i class="fas fa-search"></i></a>
       <a href="#"><i class="fas fa-user"></i></a>
       <a href="#" class="cart"><i class="fas fa-shopping-bag"></i><span>0</span></a>
       <button class="theme-toggle" onclick="toggleTheme()">
@@ -97,29 +87,6 @@
   <!-- Scripts -->
   <script src="/js/shop.js"></script>
   <script>
-    function toggleTheme() {
-      const root = document.documentElement;
-      const icon = document.getElementById("theme-icon");
-      const current = root.getAttribute("data-theme") || "dark";
-      const next = current === "light" ? "dark" : "light";
-      root.setAttribute("data-theme", next);
-      icon.className = next === "light" ? "fas fa-sun" : "fas fa-moon";
-      localStorage.setItem("theme", next);
-    }
-
-    function toggleMenu() {
-      const nav = document.getElementById("mobile-nav");
-      nav.classList.toggle("active");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const saved = localStorage.getItem("theme");
-      if (saved) {
-        document.documentElement.setAttribute("data-theme", saved);
-        document.getElementById("theme-icon").className =
-          saved === "light" ? "fas fa-sun" : "fas fa-moon";
-      }
-    });
   </script>
 </body>
 </html>

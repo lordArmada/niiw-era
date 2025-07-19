@@ -4,20 +4,25 @@
    }
 
    :root {
-       /* Dark theme colors */
-       --dark-bg: #121212;
-       --dark-text: #ffffff;
-       --dark-accent: #ff4d4d;
-       --dark-accent-dark: #cc3d3d;
-       --dark-border: #2a2a2a;
-
-       /* Light theme colors */
-       --light-bg: #ffffff;
-       --light-text: #121212;
-       --light-accent: #ff4d4d;
-       --light-accent-dark: #cc3d3d;
-       --light-border: #e0e0e0;
-
+    /* Light theme variables */
+        --light-bg: #f8f9fc;
+        --light-text: #121212;
+        --light-header-bg: #fff;
+        --light-header-text: #121212;
+        --light-border: #e3e6f0;
+        --light-card-bg: #ffffff;
+        --light-hover: #f30000ee;
+        --light-accent: #f84545e8;
+    
+        /* Dark theme variables */
+        --dark-bg: #121212;
+        --dark-text: #ffffff;
+        --dark-header-bg: rgba(30, 30, 30, 0.95);
+        --dark-header-text: #f5e8d0;
+        --dark-border: rgba(255, 255, 255, 0.1);
+        --dark-card-bg: rgba(30, 30, 30, 0.5);
+        --dark-hover: #333333;
+        --dark-accent: #f5e8d0;
        /* Default theme (dark) */
        --bg-color: var(--dark-bg);
        --text-color: var(--dark-text);

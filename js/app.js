@@ -1,14 +1,6 @@
 // 🔍 SEARCH FILTER
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
-const hamburger = document.querySelector('.hamburger');
-const searchToggle = document.querySelector('.search-toggle');
-const themeToggle = document.querySelector('.theme-toggle');
-
-// Add event listeners for accessibility buttons
-hamburger.addEventListener('click', toggleMenu);
-searchToggle.addEventListener('click', toggleSearch);
-themeToggle.addEventListener('click', toggleTheme);
 
 function applySearchFilter() {
   const query = searchInput.value.toLowerCase();
@@ -39,28 +31,7 @@ function toggleSearch() {
   searchBar.style.display = isVisible ? "none" : "flex";
 }
 
-function toggleTheme() {
-  const root = document.documentElement;
-  const currentTheme = root.getAttribute('data-theme') || 'dark';
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
-  root.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  
-  // Update theme icon
-  const themeIcon = document.getElementById('theme-icon');
-  themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-}
-
-// Initialize theme from localStorage
-document.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  
-  const themeIcon = document.getElementById('theme-icon');
-  themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-
-
+document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search-input");
   const searchButton = document.getElementById("search-button");
 
@@ -91,3 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === "Enter") applySearchFilter();
   });
 });
+
+ function toggleTheme() {
+   const root = document.documentElement;
+   const icon = document.getElementById("theme-icon");
+   const current = root.getAttribute("data-theme") || "dark";
+   const next = current === "light" ? "dark" : "light";
+   root.setAttribute("data-theme", next);
+   icon.className = next === "light" ? "fas fa-sun" : "fas fa-moon";
+   localStorage.setItem("theme", next);
+ }
+
+ function toggleMenu() {
+   const nav = document.getElementById("mobile-nav");
+   nav.classList.toggle("active");
+ }
+
+ document.addEventListener("DOMContentLoaded", () => {
+   const saved = localStorage.getItem("theme");
+   if (saved) {
+     document.documentElement.setAttribute("data-theme", saved);
+     document.getElementById("theme-icon").className =
+       saved === "light" ? "fas fa-sun" : "fas fa-moon";
+   }
+ });
